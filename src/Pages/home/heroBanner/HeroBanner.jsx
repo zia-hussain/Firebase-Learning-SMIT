@@ -43,13 +43,12 @@ const HeroBanner = () => {
           <Img src={background} />
         </div>
       )}
-      <div className="opacity layer"></div>
+      <div className="opacity-layer"></div>
       <ContentWrapper>
         <div className="heroBannerContent">
-          <span className="title">Welcome</span>
+          <span className="title">Welcome.</span>
           <span className="subTitle">
-            Discover endless entertainment. Dive into millions of movies, TV
-            shows, and more. Explore now
+            Millions of movies, TV shows and people to discover. Explore now.
           </span>
           <div className="searchInput">
             <input
