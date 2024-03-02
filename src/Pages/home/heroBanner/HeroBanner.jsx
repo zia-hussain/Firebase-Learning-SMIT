@@ -14,15 +14,6 @@ const HeroBanner = () => {
 
   const { data, loading } = useFetch("/movie/upcoming");
 
-  //   useEffect(() => {
-  //     if (data?.results?.length > 0) {
-  //       const randomIndex = Math.floor(Math.random() * data.results.length);
-  //       const randomMovie = data.results[randomIndex];
-  //       const bg = randomMovie.backdrop_path;
-  //       setBackground(bg);
-  //     }
-  //   }, [data]);
-
   useEffect(() => {
     const bg =
       url.backdrop +
@@ -33,6 +24,19 @@ const HeroBanner = () => {
 
   const searchQueryHandler = (e) => {
     if (e.key === "Enter" && query.length > 0) {
+      navigate(`/search/${query}`);
+    }
+  };
+
+  // For Search Btn For Clicked
+  const searchBtnClick = () => {
+    let input = document.getElementById("input");
+    if (input.value === "") {
+      alert(
+        "❌Empty searches lead to undiscovered treasures. Keep exploring!👍"
+      );
+      return;
+    } else {
       navigate(`/search/${query}`);
     }
   };
@@ -52,12 +56,13 @@ const HeroBanner = () => {
           </span>
           <div className="searchInput">
             <input
+              id="input"
               type="text"
               placeholder="Search for a movie or tv show...."
               onChange={(e) => setQuery(e.target.value)}
               onKeyUp={searchQueryHandler}
             />
-            <button>Search</button>
+            <button onClick={searchBtnClick}>Search</button>
           </div>
         </div>
       </ContentWrapper>
