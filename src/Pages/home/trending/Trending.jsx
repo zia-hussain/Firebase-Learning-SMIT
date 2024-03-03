@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ContentWrapper from "../../../Components/ContentWrapper/ContentWrapper";
-// import Carousel from "../../../Components/carousel/Carousel";
+import Carousel from "../../../Components/carousel/Carousel";
 import SwitchTabs from "../../../Components/switchTabs/SwitchTabs";
 import useFetch from "../../../hooks/useFetch";
 
@@ -19,7 +19,7 @@ function Trending() {
         <span className="carouselTitle">Trending</span>
         <SwitchTabs data={["Day", "Week"]} onTabChange={onTabChange} />
       </ContentWrapper>
-      {/* <Carousel data={data?.results} loading={loading} /> */}
+      <Carousel data={data?.results} loading={loading} />
     </div>
   );
 }
