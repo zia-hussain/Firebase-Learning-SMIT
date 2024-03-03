@@ -28,9 +28,21 @@
     justify-content: space-between;
   }
   .logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     cursor: pointer;
     img {
-      height: 50px;
+      height: 35px;
+    }
+    .text {
+      color: #fff;
+      letter-spacing: 1px;
+      font-size: 35px;
+      font-weight: 700;
+      background: linear-gradient(to left, #dc3564, #f4910b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   }
   .menuItems {
