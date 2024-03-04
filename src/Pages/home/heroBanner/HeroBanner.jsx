@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./style.scss";
+import { fetchDataFromApi } from "../../../Utils/api";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import { useSelector } from "react-redux";
@@ -11,16 +12,31 @@ const HeroBanner = () => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const { url } = useSelector((state) => state.home);
-
+  const [bgImage, setBgImage] = useState(null);
   const { data, loading } = useFetch("/movie/upcoming");
+  console.log(data, "data");
 
   useEffect(() => {
-    const bg =
-      url.backdrop +
-      data?.results?.[Math.floor(Math.random() * data.results.length + 20)]
-        ?.backdrop_path;
-    setBackground(bg);
-  }, [data]);
+    fetchApiConfig();
+  }, []);
+
+  const fetchApiConfig = () => {
+    fetchDataFromApi("/configuration").then((res) => {
+      const imageUrl = res.images.secure_base_url + "original";
+      setBgImage(imageUrl);
+    });
+  };
+
+  useEffect(() => {
+    if (bgImage && data && data.results.length > 0) {
+      const randomIndex = Math.floor(Math.random() * data.results.length + 20);
+      const backdropPath = data.results[randomIndex]?.backdrop_path;
+      if (backdropPath) {
+        const bg = bgImage + backdropPath;
+        setBackground(bg); // Set the background image here
+      }
+    }
+  }, [bgImage, data]);
 
   const searchQueryHandler = (e) => {
     if (e.key === "Enter" && query.length > 0) {
@@ -40,6 +56,7 @@ const HeroBanner = () => {
       navigate(`/search/${query}`);
     }
   };
+
   return (
     <div className="heroBanner">
       {!loading && (
