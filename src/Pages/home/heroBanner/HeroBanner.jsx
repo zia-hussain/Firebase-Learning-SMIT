@@ -14,7 +14,6 @@ const HeroBanner = () => {
   const { url } = useSelector((state) => state.home);
   const [bgImage, setBgImage] = useState(null);
   const { data, loading } = useFetch("/movie/upcoming");
-  console.log(data, "data");
 
   useEffect(() => {
     fetchApiConfig();
@@ -29,7 +28,7 @@ const HeroBanner = () => {
 
   useEffect(() => {
     if (bgImage && data && data.results.length > 0) {
-      const randomIndex = Math.floor(Math.random() * data.results.length + 20);
+      const randomIndex = Math.floor(Math.random() * 20);
       const backdropPath = data.results[randomIndex]?.backdrop_path;
       if (backdropPath) {
         const bg = bgImage + backdropPath;
