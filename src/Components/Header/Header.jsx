@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./style.scss";
 
 import ContentWrapper from "../ContentWrapper/ContentWrapper";
-import logo from "../../../public/movix-logo.png";
+import logo from "../../assets/movix-logo.svg";
 
 const Header = () => {
   const [show, setShow] = useState("top");
@@ -17,10 +17,6 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location]);
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {
@@ -42,8 +38,21 @@ const Header = () => {
     };
   }, [lastScrollY]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  const navigationHandler = (menu) => {
+    if (menu === "movie") {
+      navigate("/explore/movie");
+    } else if (menu === "tv") {
+      navigate("/explore/tv");
+    }
+    setMobileMenu(false);
+  };
+
   const searchQueryHandler = (event) => {
-    if (event.key === "Enter" && query.length > 0) {
+    if (event?.key === "Enter" && query?.length > 0) {
       navigate(`/search/${query}`);
       setTimeout(() => {
         setShowSearch(false);
@@ -52,22 +61,13 @@ const Header = () => {
   };
 
   const openSearch = () => {
-    setMobileMenu(false);
     setShowSearch(true);
+    setMobileMenu(false);
   };
 
   const openMobileMenu = () => {
-    setMobileMenu(true);
     setShowSearch(false);
-  };
-
-  const navigationHandler = (type) => {
-    if (type === "movie") {
-      navigate("/explore/movie");
-    } else {
-      navigate("/explore/tv");
-    }
-    setMobileMenu(false);
+    setMobileMenu(true);
   };
 
   return (
@@ -75,8 +75,8 @@ const Header = () => {
       <ContentWrapper>
         <div className="logo" onClick={() => navigate("/")}>
           <img src={logo} alt="" />
-          <h1 className="text">FlickHeist</h1>
         </div>
+
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigationHandler("movie")}>
             Movies
@@ -84,13 +84,13 @@ const Header = () => {
           <li className="menuItem" onClick={() => navigationHandler("tv")}>
             TV Shows
           </li>
-          <li className="menuItem">
-            <HiOutlineSearch onClick={openSearch} />
+          <li className="menuItem searchIcon" onClick={openSearch}>
+            <HiOutlineSearch />
           </li>
         </ul>
 
         <div className="mobileMenuItems">
-          <HiOutlineSearch />
+          <HiOutlineSearch onClick={openSearch} />
           {mobileMenu ? (
             <VscChromeClose onClick={() => setMobileMenu(false)} />
           ) : (
@@ -106,7 +106,8 @@ const Header = () => {
                 type="text"
                 placeholder="Search for a movie or tv show...."
                 onChange={(e) => setQuery(e.target.value)}
-                onKeyUp={searchQueryHandler}
+                onKeyUp={(e) => searchQueryHandler(e)}
+                autoFocus
               />
               <VscChromeClose onClick={() => setShowSearch(false)} />
             </div>
