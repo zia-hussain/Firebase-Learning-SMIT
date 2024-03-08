@@ -10,7 +10,6 @@ const Genres = ({ data }) => {
     <div className="genres">
       {data?.map((g) => {
         if (!genres[g]?.name) return;
-        console.log("genresId", g);
         return (
           <div key={g} className="genre">
             {genres[g]?.name}

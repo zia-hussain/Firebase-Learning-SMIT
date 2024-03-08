@@ -3,23 +3,22 @@ import { fetchDataFromApi } from "../Utils/api";
 
 const useFetch = (url) => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(true); // Initialize loading state as true
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading("loading...");
-    setData(null);
-    setError(null);
-
-    fetchDataFromApi(url)
-      .then((res) => {
-        setLoading(false);
+    const fetchData = async () => {
+      try {
+        const res = await fetchDataFromApi(url);
         setData(res);
-      })
-      .catch((err) => {
-        setLoading(false);
+      } catch (err) {
         setError("Something went wrong!");
-      });
+      } finally {
+        setLoading(false); // Set loading state to false after fetching data or encountering an error
+      }
+    };
+
+    fetchData();
   }, [url]);
 
   return { data, loading, error };

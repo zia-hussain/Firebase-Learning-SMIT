@@ -14,6 +14,7 @@ import { PlayBtn } from "../PlayBtn.jsx";
 import VideoPopup from "../../../Components/videoPopup/VideoPopup.jsx";
 
 const DetailsBanner = ({ video, crew }) => {
+  console.log("Video", video);
   const [show, setShow] = useState(false);
   const [videoId, setVideoId] = useState(null);
 
@@ -28,14 +29,12 @@ const DetailsBanner = ({ video, crew }) => {
   const writer = crew?.filter(
     (f) => f.job === "Screenplay" || f.job === "story" || f.job === "writer"
   );
-  console.log("Directors", director);
 
   const toHoursAndMinutes = (totalMinutes) => {
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
     return `${hours}h${minutes > 0 ? ` ${minutes}m` : ""}`;
   };
-  console.log("Data", data);
 
   return (
     <div className="detailsBanner">
@@ -56,7 +55,7 @@ const DetailsBanner = ({ video, crew }) => {
                         src={url.backdrop + data?.poster_path}
                       />
                     ) : (
-                      <Img className={posterImg} src={PosterFallback} />
+                      <Img className="posterImg" src={PosterFallback} />
                     )}
                   </div>
                   <div className="right">
@@ -72,7 +71,7 @@ const DetailsBanner = ({ video, crew }) => {
                         className="playbtn"
                         onClick={() => {
                           setShow(true);
-                          setVideoId(video.key);
+                          setVideoId(id);
                         }}
                       >
                         <PlayBtn />

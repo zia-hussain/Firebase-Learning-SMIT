@@ -51,8 +51,6 @@ const Carousel = ({ data, loading, endpoint, title }) => {
 
   const fetchApiConfig = () => {
     fetchDataFromApi("/configuration").then((res) => {
-      console.log(res);
-
       const urls = {
         backdrop: res.images.secure_base_url + "original",
         poster: res.images.secure_base_url + "original",
@@ -81,8 +79,8 @@ const Carousel = ({ data, loading, endpoint, title }) => {
         {!loading ? (
           <div className="carouselItems" ref={carouselContainer}>
             {data?.map((item) => {
-              const posterUrl = item.poster_path
-                ? imageurl.poster + item.poster_path
+              const posterUrl = item?.poster_path
+                ? imageurl?.poster + item?.poster_path
                 : PosterFallback;
 
               return (
