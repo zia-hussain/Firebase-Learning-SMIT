@@ -20,29 +20,35 @@ const VideosSection = ({ data, loading }) => {
     );
   };
 
+  // Check if there are videos available
+  const hasVideos = data && data.results && data.results.length > 0;
+
   return (
     <div className="videosSection">
       <ContentWrapper>
-        <div className="sectionHeading">Official Videos</div>
+        {/* Render the section heading only if there are videos available */}
+        {hasVideos && <div className="sectionHeading">Official Videos</div>}
         {!loading ? (
           <div className="videos">
-            {data?.results?.map((video) => (
-              <div
-                className="videoItem"
-                key={video.id}
-                onClick={() => {
-                  setVideoId(video.key);
-                  setShow(true);
-                }}
-              >
-                <div className="videoThumbnail">
-                  <Img
-                    src={`https://img.youtube.com/vi/${video.key}/mqdefault.jpg`}
-                  />
-                  <PlayBtn />
+            {data?.results
+              ?.filter((video) => video.key && video.key.length > 0)
+              .map((video) => (
+                <div
+                  className="videoItem"
+                  key={video.id}
+                  onClick={() => {
+                    setVideoId(video.key);
+                    setShow(true);
+                  }}
+                >
+                  <div className="videoThumbnail">
+                    <Img
+                      src={`https://img.youtube.com/vi/${video.key}/mqdefault.jpg`}
+                    />
+                    <PlayBtn />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         ) : (
           <div className="videoSkeleton">

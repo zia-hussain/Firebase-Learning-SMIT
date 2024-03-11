@@ -14,7 +14,6 @@ import { PlayBtn } from "../PlayBtn.jsx";
 import VideoPopup from "../../../Components/videoPopup/VideoPopup.jsx";
 
 const DetailsBanner = ({ video, crew }) => {
-  console.log("Video", video);
   const [show, setShow] = useState(false);
   const [videoId, setVideoId] = useState(null);
 
@@ -67,17 +66,20 @@ const DetailsBanner = ({ video, crew }) => {
 
                     <div className="row">
                       <CircleRating rating={data?.vote_average.toFixed(1)} />
-                      <div
-                        className="playbtn"
-                        onClick={() => {
-                          setShow(true);
-                          setVideoId(video.key);
-                        }}
-                      >
-                        <PlayBtn />
-                        <span className="text">Watch Trailer</span>
-                      </div>
+                      {video && (
+                        <div
+                          className="playbtn"
+                          onClick={() => {
+                            setShow(true);
+                            setVideoId(video.key);
+                          }}
+                        >
+                          <PlayBtn />
+                          <span className="text">Watch Trailer</span>
+                        </div>
+                      )}
                     </div>
+
                     <div className="overview">
                       <div className="heading">Overview</div>
                       <div className="description">{data?.overview}</div>
