@@ -31,16 +31,16 @@ const Footer = () => {
           community!
         </div>
         <div className="socialIcons">
-          <span className="icon">
+          <span title="No navigation available" className="icon">
             <FaFacebookF />
           </span>
-          <span className="icon">
+          <span title="This icon has no link" className="icon">
             <FaInstagram />
           </span>
-          <span className="icon">
+          <span title="Not linked to anything" className="icon">
             <FaTwitter />
           </span>
-          <span className="icon">
+          <span title="Non-navigable" className="icon">
             <FaLinkedin />
           </span>
         </div>
