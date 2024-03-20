@@ -4,7 +4,6 @@ import ContentWrapper from "../../../Components/ContentWrapper/ContentWrapper";
 import { PlayBtn } from "../PlayBtn";
 import VideoPopup from "../../../Components/videoPopup/VideoPopup";
 import Img from "../../../Components/lazyLoadImage/Img";
-import posterFallback from "../../../assets/no-poster.png";
 
 const VideosSection = ({ data, loading }) => {
   const [show, setShow] = useState(false);

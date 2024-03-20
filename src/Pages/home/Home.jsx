@@ -11,7 +11,7 @@ function Home() {
       <Trending />
       <Popular />
       <TopRated />
-      <div style={{ height: 100 }}></div>
+      <div style={{ height: 50 }}></div>
     </div>
   );
 }

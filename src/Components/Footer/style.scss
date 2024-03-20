@@ -65,4 +65,33 @@
       }
     }
   }
+  .copyRightBanner {
+    margin-top: 3rem;
+    margin-bottom: -5rem;
+    height: max-content;
+    background: linear-gradient(to top, var(--black), #020c1b);
+    width: 100vw;
+    padding-block: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff9;
+
+    h6 {
+      font-size: 14px;
+    }
+    .name {
+      background: linear-gradient(to right, #dc3564, #f4910b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    @media screen and (min-width: 768px) {
+      h6 {
+        font-size: 16px;
+        font-weight: 100;
+      }
+    }
+  }
 }

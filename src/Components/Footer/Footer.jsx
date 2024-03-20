@@ -9,6 +9,7 @@ import {
 import ContentWrapper from "../ContentWrapper/ContentWrapper";
 
 import "./style.scss";
+import { Navigate } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -42,6 +43,12 @@ const Footer = () => {
           <span className="icon">
             <FaLinkedin />
           </span>
+        </div>
+        <div className="copyRightBanner">
+          <h6>
+            Copyright © 2024 <span className="name"> Zia Hussain</span>. All
+            Rights Reserved.
+          </h6>
         </div>
       </ContentWrapper>
     </footer>
